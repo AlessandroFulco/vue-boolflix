@@ -2,9 +2,10 @@
   <div class="hello">
    
 
-   <SearchBar
-   @mySearch="inputName"
-   />
+    <input v-model="inputText" @keyup.enter="searchFilms(inputText)" type="text">
+    <button @click.prevent="searchFilms(inputText)">Cerca</button>
+    <br>
+
 
 
     <MyFilm
@@ -18,17 +19,16 @@
 <script>
 import axios from 'axios'
 import MyFilm from './MyFilm.vue'
-import SearchBar from './SearchBar.vue'
+
 
 export default {
   name: 'ContainerFilm',
   components: {
     MyFilm,
-    SearchBar
   },
   data() {
     return {
-      apiUrl: "https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=io sono leggenda&language=it",
+      apiUrl: "https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it",
       film: [],
       inputText: ""
     }
@@ -36,36 +36,29 @@ export default {
   created() {
     this.getFilm()
   },
-  beforeCreate(){
-    this.showFilms(this.inputText)
-    console.log(this.apiUrl);
-
-  },
   
   methods: {
     getFilm(){
-      axios
-        .get(this.apiUrl)
-        .then(result => {
+      if(this.inputText !== "") {
+
+        let currentUrl = this.apiUrl + '&query=' + this.inputText;
+        axios
+        .get(currentUrl)
+        .then((result) => {
             this.film = result.data.results;
+            console.log(1 ,this.film);
         })
         .catch(error => {
             console.log("Errore", error);
         })
+      }
     },
-    inputName(genereUser) {
-      this.inputText = genereUser;
-      console.log(this.inputText);
-      
-      
-    },
-    showFilms(text){
-      
-      this.apiUrl = "https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=" + text + "&language=it"
+    searchFilms(userInput){
+      this.inputText = userInput;
+      console.log(2 , this.inputText);
+      this.getFilm();
     }
-  },
-  
-  
+  }
 }
 
 </script>
