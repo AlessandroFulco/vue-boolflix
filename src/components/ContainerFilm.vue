@@ -9,22 +9,28 @@
 
 
     <div id="container-film">
+      
+      <h1>film</h1>
       <div id="film">
-        <h1>film</h1>
         <MyFilm
-          v-for="(item, index) in film" :key="index"
-          :filmData="item"
+        id="film"
+        v-for="(item, index) in film" :key="index"
+        :filmData="item"
         />
       </div>
+      
 
 
+      
+      <h1>Serie</h1>
       <div id="serie">
-        <h1>Serie</h1>
         <MyFilm
-          v-for="(item, index) in serie" :key="index"
-          :filmData="item"
+        id="serie"
+        v-for="(item, index) in serie" :key="index"
+        :filmData="item"
         />
       </div>
+      
     </div>
     
   </div>
@@ -105,8 +111,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #container-film{
-  display: flex;
-  justify-content: center;
-  gap: 300px;
+  margin-top: 50px;
+
+    #film{
+      display: flex;
+      align-items: center;        
+    }
+
+    #serie{
+      display: flex;
+      align-items: center;          
+    }
 }
 </style>
