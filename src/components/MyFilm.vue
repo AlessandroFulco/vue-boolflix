@@ -2,15 +2,15 @@
     <div>
         <ul>
             <li>
-                {{filmData.title}}
+                {{filmData.title}}{{filmData.name}}
             </li>
 
             <li>
-                {{filmData.original_title}}
+                {{filmData.original_title}} {{filmData.original_name}}
             </li>
 
             <li>
-                {{filmData.original_language}}
+                <lang-flag :iso="filmData.original_language" />
             </li>
 
             <li>
@@ -22,10 +22,13 @@
 </template>
 
 <script>
-
+import LangFlag from 'vue-lang-code-flags';
 
 export default {
   name: 'MyFilm',
+  components: {
+    LangFlag
+  },
   props: {
     filmData : Object
   }
