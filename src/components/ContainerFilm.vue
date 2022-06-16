@@ -1,34 +1,44 @@
 <template>
-  <div class="hello">
+  <div>
    
 
-    <input v-model="inputText" @keyup.enter="searchFilmsSeries(inputText)" type="text">
-    <button @click.prevent="searchFilmsSeries(inputText)">Cerca</button>
-    <br>
+    <header>
+      <h1>BOOLFLIX</h1>
+
+      <div id="search">
+        <input v-model="inputText" @keyup.enter="searchFilmsSeries(inputText)" type="text">
+        <button @click.prevent="searchFilmsSeries(inputText)">Cerca</button>
+        <br>
+      </div>
+    </header>
 
 
 
     <div id="container-film">
       
-      <h1>film</h1>
-      <div id="film">
-        <MyFilm
-        id="film"
-        v-for="(item, index) in film" :key="index"
-        :filmData="item"
-        />
+      <h2>FILM</h2>
+      <div class="scroll">
+        <div id="film">
+          <MyFilm
+          id="film"
+          v-for="(item, index) in film" :key="index"
+          :filmData="item"
+          />
+        </div>
       </div>
       
 
 
       
-      <h1>Serie</h1>
-      <div id="serie">
-        <MyFilm
-        id="serie"
-        v-for="(item, index) in serie" :key="index"
-        :filmData="item"
-        />
+      <h2>SERIE</h2>
+      <div class="scroll">
+        <div id="serie">
+          <MyFilm
+          id="serie"
+          v-for="(item, index) in serie" :key="index"
+          :filmData="item"
+          />
+        </div>
       </div>
       
     </div>
@@ -110,17 +120,51 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    color: red;
+  }
+  
+  div#search {
+    margin-right: 40px;
+  }
+}
+
+
 #container-film{
-  margin-top: 50px;
+  height: calc(100vh - 100px);
+  background-color: #666;
+  margin-top: 100px;
+  padding-top: 50px;
+  
+  h2 {
+    font-size: 30px;
+    padding: 20px 10px;
+  }
+    .scroll {
+      overflow: auto;
+        #film{
+          width: 100%;
 
-    #film{
-      display: flex;
-      align-items: center;        
-    }
+          display: flex;
+          align-items: flex-start;
+        
+        }
 
-    #serie{
-      display: flex;
-      align-items: center;          
+        #serie{
+          width: 100%;
+          display: flex;
+          align-items: center;          
+        }
     }
 }
 </style>
